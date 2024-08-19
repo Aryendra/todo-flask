@@ -54,23 +54,32 @@ def delete(n):
     return redirect('/')
 
 
-@app.route("/edit/<int:n>", methods=['GET','POST'])
+@app.route("/edit/<int:n>",methods=['GET','POST'] )
 def edit(n):
-    
-    return render_template('edit.html',n=n)
-@app.route("/edited/<int:n>",methods=['GET','POST'] )
-def edited(n):
+
+    if request.method=='POST':
+        title=request.form['title']
+        desc=request.form['desc']
+        todo=Todo.query.filter_by(sno=n).first()
+        todo.title=title
+        todo.desc=desc
+        db.session.add(todo)
+        db.session.commit()
+        return redirect('/')
     todo=Todo.query.filter_by(sno=n).first()
-    db.session.delete(todo)
 
-    edit_title=request.form['edit_title']
-    edit_desc=request.form['edit_desc']
+    return render_template('edit.html',todo=todo)
+    # 
+    # db.session.delete(todo)
+
+    # edit_title=request.form['edit_title']
+    # edit_desc=request.form['edit_desc']
     
-    new=Todo(title=edit_title, desc=edit_desc)
-    db.session.add(new)
-    db.session.commit()
+    # new=Todo(title=edit_title, desc=edit_desc)
+    # db.session.add(new)
+    # db.session.commit()
 
-    return redirect("/")
+    # return redirect("/")
 
 
 

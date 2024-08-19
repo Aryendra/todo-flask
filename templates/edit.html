@@ -58,15 +58,15 @@
     <div class="container mb-3">
 
 
-        <form action="/edited/{{n}}" method="POST">
+        <form action="/edit/{{todo.sno}}" method="POST">
             <div class="mb-3">
                 <label for="title" class="form-label">Edit Title</label>
-                <input type="text" class="form-control" name="edit_title" id="title" aria-describedby="emailHelp">
+                <input type="text" class="form-control" name="title" value="{{todo.title}}" id="title" aria-describedby="emailHelp">
                
             </div>
             <div class="mb-3">
                 <label for="desc" class="form-label">Edit Desc</label>
-                <input type="text" class="form-control" name="edit_desc" id="desc">
+                <input type="text" class="form-control" name="desc" value="{{todo.desc}}" id="desc">
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">

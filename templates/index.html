@@ -44,9 +44,7 @@
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
+                 
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -60,7 +58,7 @@
 
         <form action="/" method="POST">
             <div class="mb-3">
-                <label for="title" class="form-label">Add Title</label>
+                <label for="title" class="form-label"><strong>Title</strong></label>
                 <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp">
                
             </div>
@@ -79,34 +77,52 @@
 
     <div class="container">
 
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Sno</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Actions</th>
-
-                    <!-- <th scope="col">date</th> -->
-                </tr>
-            </thead>
-            <tbody>
-            {% for todo in todos %}
-                <tr>
-                    <th scope="row">{{loop.index}}</th>
-                    <td>{{todo.title}}</td>
-                    <td>{{todo.desc}}</td>
+        {% if todos|length==0 %}
+            no record
                     
-                    <td>
-                        <a href="/edit/{{todo.sno}}"><button type="button" class="btn btn-primary">Edit</button></a>
-                        <a href="/delete/{{todo.sno}}"><button type="button" class="btn btn-dark">Delete</button></a>
-                    </td>
-                </tr>
-            {% endfor %}
+                        
+            {% else %}
+
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sno</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Actions</th>
+
+                            <!-- <th scope="col">date</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        
+                        
+                
+
+            
+                    
+                
+                    {% for todo in todos %}
+                        <tr>
+                            <th scope="row">{{loop.index}}</th>
+                            <td>{{todo.title}}</td>
+                            <td>{{todo.desc}}</td>
+                            
+                            <td>
+                                <a href="/edit/{{todo.sno}}"><button type="button" class="btn btn-primary">Edit</button></a>
+                                <a href="/delete/{{todo.sno}}"><button type="button" class="btn btn-dark">Delete</button></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                
 
             </tbody>
         </table>
+
+        {% endif %}
 
     </div>
 
